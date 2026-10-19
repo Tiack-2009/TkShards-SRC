@@ -1,0 +1,115 @@
+#  TKShards — toàn bộ tin nhắn lệnh (Tiếng Việt)
+#
+#  Màu sắc: dùng mã &-code và hex &#RRGGBB đều được.
+#  Biến có sẵn mọi nơi:
+#    {prefix}    giá trị "prefix" bên dưới
+#    {currency}  tên tiền tệ trong config.yml (vd: "Shard")
+#    {Currency}  như trên nhưng viết hoa chữ cái đầu
+#  Biến riêng của từng tin nhắn được ghi chú bên cạnh (vd: {player}, {amount}).
+#  Để trống "" để ẩn tin nhắn đó.
+
+prefix: "&7[&#A303F9{Currency}&7] "
+
+common:
+  no-permission: "&cBạn không có quyền làm điều này."
+  players-only: "&cLệnh này chỉ dành cho người chơi."
+  player-not-online: "&cNgười chơi &f{player} &ckhông online."          # {player}
+  player-not-found: "&cKhông tìm thấy người chơi &f{player}&c."          # {player}
+  invalid-amount: "&cSố lượng không hợp lệ: &f{amount}"                  # {amount}
+  amount-positive: "&cSố lượng phải lớn hơn 0."
+  system-disabled: "&cHệ thống {Currency} đang tắt."
+
+# /tkshards [người chơi]
+balance:
+  console-specify: "&cConsole: hãy chỉ định một người chơi. &7/{label} <người chơi>"   # {label}
+  self: "{prefix}&fBạn đang có &#A303F9{balance} &f{currency}."             # {balance}
+  other: "{prefix}&f{player} &7đang có &#A303F9{balance} &f{currency}."      # {player} {balance}
+  no-permission-others: "&cBạn không được xem {currency} của người khác."
+
+# /tkshardspay <người chơi|toggle> <số lượng>
+pay:
+  usage: "&cCách dùng: /{label} <người chơi|toggle> <số lượng>"            # {label}
+  cant-pay-self: "&cBạn không thể tự chuyển cho chính mình."
+  not-accepting: "&f{player} &chiện không nhận chuyển {currency}."   # {player}
+  not-enough: "&cBạn không đủ {currency} (bạn đang có &f{balance}&c)."   # {balance}
+  sent: "{prefix}&aĐã chuyển &f{amount} &a{currency} cho &f{player} &7(số dư: &f{balance}&7)"       # {amount} {player} {balance}
+  received: "{prefix}&aĐã nhận &f{amount} &a{currency} từ &f{player} &7(số dư: &f{balance}&7)"  # {amount} {player} {balance}
+  toggle-on: "{prefix}&aBạn đã &2cho phép&a nhận {currency} từ người khác."
+  toggle-off: "{prefix}&cBạn đã tắt nhận {currency}. &7Người khác không thể chuyển cho bạn."
+
+# /tkbooster <người chơi> <thời gian>
+booster:
+  usage: "&cCách dùng: /tkbooster <người chơi> <thời gian>"
+  usage-durations: "&7Thời gian: &f1h&7, &f30m&7, &f7d&7, &f60s"
+  invalid-duration: "&cThời gian không hợp lệ: &f{duration}"           # {duration}
+  given: "&7[&#A303F9Booster&7] &aĐã tặng booster &f{duration} &acho &f{player}"        # {duration} {player}
+  received: "&7[&#A303F9Booster&7] &aBạn vừa nhận được booster &f{duration}&a!"   # {duration}
+
+# /tkshardsmanager <add|remove|set> <người chơi> <số lượng>
+manager:
+  added: "{prefix}&aĐã cộng &f{amount} &a{currency} cho &f{player} &7(tổng: &f{total}&7)"      # {amount} {player} {total}
+  removed: "{prefix}&cĐã trừ &f{amount} &c{currency} của &f{player} &7(tổng: &f{total}&7)" # {amount} {player} {total}
+  set: "{prefix}&fĐã đặt {currency} của &f{player}&f thành &a{amount}"     # {player} {amount}
+  help-title: "  &#A303F9{Currency}Manager &7— quản lý {currency}"
+  help-add: "  &f/{label} add &8<người chơi> <số lượng>"               # {label}
+  help-remove: "  &f/{label} remove &8<người chơi> <số lượng>"         # {label}
+  help-set: "  &f/{label} set &8<người chơi> <số lượng>"               # {label}
+
+# /tkshardsshop
+# /tkshardsreload
+reload:
+  reloading: "&eĐang tải lại plugin..."
+  success: "{prefix}&aĐã tải lại cấu hình."
+  error: "&cLỗi khi tải lại: {error}"                               # {error}
+
+# /tkpotion
+potion:
+  usage: "&cCách dùng: /tkpotion <người chơi>"
+  given: "{prefix}&aĐã phát 1 thuốc nhân đôi shard cho &f{player}&a."
+  notify: "{prefix}&aBạn vừa nhận được 1 thuốc nhân đôi shard! &7Chuột phải để uống."
+  received: "{prefix}&aBạn đã uống thuốc! &7Shard nhân &fx{multiplier} &7trong &f{duration}&7."
+  expired-on-drink: "{prefix}&cThuốc này đã hết hạn, không còn tác dụng."
+  expired-removed: "{prefix}&cMột lọ thuốc trong túi của bạn đã hết hạn (quá 24h) và bị dọn bỏ."
+
+# /tkautoshard
+autoshard:
+  toggle-on: "{prefix}&aBạn đã &2BẬT&a nhận AutoShard."
+  toggle-off: "{prefix}&cBạn đã &4TẮT&c nhận AutoShard."
+  given-on: "{prefix}&aĐã cấp AutoShard cho &f{player}&a."
+  given-off: "{prefix}&cĐã thu hồi AutoShard của &f{player}&c."
+  received-on: "{prefix}&aBạn đã được cấp quyền nhận AutoShard!"
+  received-off: "{prefix}&cQuyền nhận AutoShard của bạn đã bị thu hồi."
+
+# /shard time
+shardtime:
+  usage: "&cCách dùng: /shard time <người chơi> <thời gian>"
+  invalid-duration: "&cThời gian không hợp lệ: &f{duration}"                    # {duration}
+  set: "{prefix}&aĐã đặt thời gian AFK riêng của &f{player} &athành &f{duration}&a."   # {player} {duration}
+  notify: "{prefix}&aThời gian chờ AFK của bạn đã được đổi thành &f{duration}&a."       # {duration}
+
+# /top
+top:
+  usage: "&cCách dùng: /top <shard|money|kill|die|sell>"
+  header: "&8&l--- &eTop {label} &8&l---"                                       # {label}
+  entry: "&7#{rank} &f{player} &7- &e{value}"                                   # {rank} {player} {value}
+  empty: "&7Chưa có dữ liệu nào."
+  vault-unavailable: "&cKhông tìm thấy Vault - không thể xem /top money."
+
+# /tkzones
+zones:
+  usage: "&cCách dùng: /tkzones <wand|create|remove|list|check>"
+  wand-given: "{prefix}&aBạn đã nhận wand chọn vùng. &7Chuột trái = điểm 1, chuột phải = điểm 2."
+  pos1-set: "{prefix}&aĐã đặt điểm 1: &f{pos}"          # {pos}
+  pos2-set: "{prefix}&aĐã đặt điểm 2: &f{pos}"          # {pos}
+  need-both-points: "&cBạn cần chọn cả 2 điểm trước (dùng wand)."
+  created: "{prefix}&aĐã tạo vùng AFK &f{name}&a."      # {name}
+  already-exists: "&cVùng &f{name} &cđã tồn tại."       # {name}
+  removed: "{prefix}&aĐã xóa vùng &f{name}&a."          # {name}
+  not-found: "&cKhông tìm thấy vùng &f{name}&c."        # {name}
+  list-header: "&7Danh sách vùng AFK:"
+  list-entry: "&8- &f{name} &7({world})"                # {name} {world}
+  list-empty: "&7Chưa có vùng AFK nào."
+  check-everywhere: "&7Quyền &ftkshards.everywhere&7: {value}"                 # {value}
+  check-physical: "&7Đang đứng trong vùng: {value} &7({zone})"                  # {value} {zone}
+  check-result: "&7Kết quả: {value}"                                            # {value}
+  check-everywhere-hint: "&eBạn có quyền tkshards.everywhere (có thể do wildcard &f*&e trong LuckPerms) nên được tính dù không đứng trong vùng nào - đây không phải lỗi plugin."

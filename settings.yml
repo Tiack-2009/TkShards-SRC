@@ -1,0 +1,9 @@
+#  TKShards — cài đặt chung
+
+# Rút gọn số lượng lớn khi hiển thị trong /tkshards.
+#   1500 -> 1.5K   2300000 -> 2.3M   4000000000 -> 4B
+# Đặt enabled: false để luôn hiện số đầy đủ.
+number-format:
+  enabled: true
+  decimals: 1
+  suffixes: ["", "K", "M", "B", "T", "Q"]

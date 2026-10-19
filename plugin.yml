@@ -1,0 +1,63 @@
+name: TKShards
+version: '1.0.0'
+main: com.tkshards.plugin.TKShardsPlugin
+api-version: '1.20'
+author: TuanKa
+description: Plugin tiền tệ "Shard" (TKShards) - riêng, dịch hoàn toàn tiếng Việt.
+softdepend: [PlaceholderAPI, Vault]
+
+commands:
+  tkshards:
+    description: Xem số dư Shard
+    usage: /tkshards [người chơi]
+    aliases: [shards, tks]
+  tkshardspay:
+    description: Chuyển Shard cho người chơi khác
+    usage: /tkshardspay <người chơi|toggle> <số lượng>
+    aliases: [shardspay]
+  tkshardsmanager:
+    description: Quản lý Shard (admin)
+    usage: /tkshardsmanager <add|remove|set> <người chơi> <số lượng>
+    aliases: [shardsmanager]
+  tkshardsreload:
+    description: Tải lại cấu hình plugin
+    usage: /tkshardsreload
+    aliases: [shardsreload]
+  tkbooster:
+    description: Tặng booster Shard cho người chơi
+    usage: /tkbooster <người chơi> <thời gian>
+    aliases: [givebooster]
+  tkzones:
+    description: Quản lý vùng AFK nhận Shard
+    usage: /tkzones <wand|create|remove|list|check>
+  tkautoshard:
+    description: Bật/tắt AutoShard - không tham số là cho riêng bạn; "<người chơi> on/off" là admin cấp/thu hồi trực tiếp
+    usage: /tkautoshard [người chơi] [on|off]
+    aliases: [autoshard, giveautoshard]
+  tkpotion:
+    description: Phát thuốc nhân đôi Shard cho người chơi (admin)
+    usage: /tkpotion <người chơi>
+    aliases: [givepotion]
+  shard:
+    description: Xem số dư, chuyển Shard, hoặc chỉnh thời gian AFK riêng cho người chơi
+    usage: /shard [người chơi | pay <người chơi> <số lượng> | time <người chơi> <thời gian>]
+  top:
+    description: Bảng xếp hạng
+    usage: /top <shard|money|kill|die|sell>
+
+permissions:
+  tkshards.admin:
+    description: Toàn quyền quản trị plugin TKShards
+    default: op
+  tkautoshard:
+    description: Nhận AutoShard tự động định kỳ (gán qua LuckPerms, admin/op cấp)
+    default: false
+  tkshards.everywhere:
+    description: Nhận Shard từ vùng AFK ở mọi nơi (không chỉ trong vùng)
+    default: false
+  tkshards.boost.2:
+    default: false
+  tkshards.boost.3:
+    default: false
+  tkshards.boost.5:
+    default: false

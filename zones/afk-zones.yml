@@ -1,0 +1,15 @@
+# Cau hinh vung AFK
+AFK-ZONES:
+  shards-per-interval: 2      # Số Shard nhận mỗi khoảng thời gian (mặc định, không boost)
+  interval-seconds: 60         # Khoang thoi gian (giay)
+  # Moi bao nhieu giay thi cap nhat so dem tren action bar (60,59,58,...,1,0)
+  display-interval-seconds: 1
+  action-bar: "&7Shard tiếp theo sau &f{time}s"
+
+  # Boost theo quyen (trong vung AFK, hoac o moi noi neu co quyen tkshards.everywhere).
+  # Nguoi choi duoc tinh theo muc quyen cao nhat ma ho co.
+  # Booster nhan them tren muc nay.
+  permission-boosts:
+    tkshards.boost.5: 5
+    tkshards.boost.3: 3
+    tkshards.boost.2: 2

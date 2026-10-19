@@ -1,0 +1,73 @@
+#  TKShards — cấu hình chính
+
+# Ten hien thi cho loai tien te nay.
+currency-name: "Shard"
+
+# Quyền cần có để kiếm Shard (giết người + vùng AFK).
+# De trong "" thi ai cung kiem duoc, khong gioi han.
+required-permission: ""
+
+#  Giet nguoi (PvP)
+kill:
+  shards-per-kill: 10
+  # Placeholder: {shards} = so luong, {currency} = ten tien te
+  kill-message: '&#A303F9+{shards} {currency}'
+  # Thoi gian cho (phut) truoc khi giet lai CUNG 1 nguoi do duoc tinh diem tiep (chong farm)
+  cooldown-minutes: 20
+
+#  Vat pham Booster
+booster:
+  multiplier: 4
+  # {time} = thoi gian con lai (vd "4m 30s"), {multiplier} = he so nhan hien tai
+  # Dong nay dung chung cho CA Booster lan Thuoc (vi ca 2 dung chung co che active-until)
+  countdown-actionbar: '&dBoost: &fx{multiplier} &dcòn &f{time}'
+  display-name: '&#A303F9Booster Shard'
+  lore:
+    - '&7Chuột phải để kích hoạt.'
+    - '&7Nhân đôi thu nhập Shard trong lúc kích hoạt.'
+    - ''
+    - '&8Thời gian còn lại: &f%time-left%'
+
+# Vật phẩm "Thuốc" - uống vào để nhân đôi shard trong 1 khoảng thời gian.
+# Dùng chung cơ chế với Booster ở trên, nhưng hệ số nhân/thời gian riêng.
+potion:
+  multiplier: 2
+  duration-seconds: 1800
+  # Thoi gian toi da thuoc con dung duoc, tinh tu luc phat cho nguoi choi (gio)
+  expire-hours: 24
+  display-name: '&bThuốc Nhân Đôi Shard'
+  lore:
+    - '&7Uống vào (giữ chuột phải) để kích hoạt.'
+    - '&7Nhân đôi thu nhập Shard trong 30 phút.'
+    - '&8Hết hạn sau 24h nếu không dùng.'
+
+#  AutoShard — thuong tu dong cho nguoi choi Premium, KHONG can dung
+#  trong vung AFK (khac voi he thong AFK-ZONES trong zones/afk-zones.yml).
+auto-shard:
+  enabled: true
+  # Quyen can co de duoc nhan AutoShard (gan qua LuckPerms cho rank Premium).
+  # Vi du: /lp group premium permission set tkautoshard true
+  permission: "tkautoshard"
+  amount: 1
+  # Tong thoi gian cho giua 2 lan nhan shard (giay)
+  interval-seconds: 30
+  # Moi bao nhieu giay thi cap nhat so dem tren action bar (30,25,20,...,5,0)
+  display-interval-seconds: 5
+  # {time} = so giay con lai
+  countdown-actionbar: '&7AutoShard tiếp theo trong: &f{time}s'
+  # {amount} = số shard nhận được, {currency} = tên tiền tệ (Shard)
+  message: '&#A303F9[AutoShard] &fBạn đã nhận được &a+{amount} {currency}&f!'
+
+# Du lieu (so du, cai dat rieng tung nguoi choi) duoc luu trong file
+# "data.yml" trong thu muc plugin - khong can cau hinh gi them o day.
+
+# Nhan shard theo rank - ap dung cho MOI nguon thu nhap (giet nguoi, vung AFK,
+# AutoShard), KHAC voi Booster/Thuoc (chi tam thoi). Gan quyen qua LuckPerms
+# cho tung rank, vd: /lp group vip permission set tkshards.multiplier.2 true
+# Neu 1 nguoi co nhieu quyen cung luc, chi ap dung muc CAO NHAT ho co.
+rank-multiplier:
+  enabled: true
+  permissions:
+    tkshards.multiplier.3: 3
+    tkshards.multiplier.2: 2
+    tkshards.multiplier.1: 1

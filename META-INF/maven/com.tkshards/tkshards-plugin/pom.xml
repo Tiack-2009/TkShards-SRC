@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.tkshards</groupId>
+    <artifactId>tkshards-plugin</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>papermc-repo</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
+        </repository>
+        <repository>
+            <id>placeholderapi</id>
+            <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <!--
+          Paper API (thay cho Spigot API): ngoai nhung gi Spigot API co, con di
+          kem san cac lop scheduler tuong thich Folia (GlobalRegionScheduler,
+          AsyncScheduler...), can thiet de bien dich SchedulerUtil.java.
+          Jar build ra van chay binh thuong tren ca Paper lan Folia (Folia la
+          1 nhanh cua Paper); KHONG chay duoc tren Spigot/CraftBukkit thuan
+          (khong co Paper) do dung mot so API chi Paper co.
+        -->
+        <dependency>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>1.20.4-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- PlaceholderAPI (mem - chi can khi bien dich, khong bat buoc luc chay) -->
+        <dependency>
+            <groupId>me.clip</groupId>
+            <artifactId>placeholderapi</artifactId>
+            <version>2.11.6</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Vault (mem - chi dung cho /top money) -->
+        <dependency>
+            <groupId>com.github.MilkBowl</groupId>
+            <artifactId>VaultAPI</artifactId>
+            <version>1.7</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>TKShards</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!--
+      Obfuscator (TUY CHON, khong bat mac dinh): lam roi ten class/method ben
+      trong jar, mot lop bao ve chong "lay cap" code, khong phai bao mat
+      tuyet doi. Build binh thuong (mvn clean package) KHONG bi anh huong -
+      chi khi chay rieng voi -Pobfuscate thi moi tao them ban jar da lam
+      roi, de o target/TKShards-obfuscated.jar (jar thuong TKShards.jar
+      van con nguyen, dung duoc binh thuong, phong khi ban obfuscate loi).
+      Cach dung: mvn clean package -Pobfuscate
+    -->
+    <profiles>
+        <profile>
+            <id>obfuscate</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.wvengen</groupId>
+                        <artifactId>proguard-maven-plugin</artifactId>
+                        <version>2.6.0</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>proguard</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <proguardVersion>7.4.2</proguardVersion>
+                            <injar>TKShards.jar</injar>
+                            <outjar>TKShards-obfuscated.jar</outjar>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <obfuscate>true</obfuscate>
+                            <options>
+                                <option>-keep class com.tkshards.plugin.TKShardsPlugin { public *; }</option>
+                                <option>-keepclassmembers enum * { public static **[] values(); public static ** valueOf(java.lang.String); }</option>
+                                <option>-dontwarn org.bukkit.**</option>
+                                <option>-dontwarn net.milkbowl.vault.**</option>
+                                <option>-dontwarn me.clip.placeholderapi.**</option>
+                                <option>-dontoptimize</option>
+                                <option>-dontshrink</option>
+                                <option>-keepattributes *Annotation*</option>
+                            </options>
+                            <libs>
+                                <lib>${java.home}/jmods/java.base.jmod</lib>
+                            </libs>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
